@@ -1,8 +1,8 @@
 ---
-title: "JavaScript 메모장"
-excerpt: "JavaScript 메모장"
+title: "JavaScript Reference"
+excerpt: "JavaScript Reference"
 category: Launguage Reference
-tags: [javascript]
+tags: [JavaScript, compare, sort, print, stack, queue]
 toc: true
 toc_sticky: true
 ---

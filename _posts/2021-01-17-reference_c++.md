@@ -1,8 +1,20 @@
 ---
-title: "C++ 메모장"
-excerpt: "C++ 메모장"
+title: "C++ Reference"
+excerpt: "C++ Reference"
 category: Launguage Reference
-tags: [C++]
+tags:
+  [
+    C++,
+    iostream,
+    vector,
+    algorithm,
+    queue,
+    string,
+    map,
+    set,
+    multimap,
+    multiset,
+  ]
 toc: true
 toc_sticky: true
 ---
