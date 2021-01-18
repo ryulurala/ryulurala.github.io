@@ -9,24 +9,34 @@ toc_sticky: true
 
 ## 레퍼런스
 
-### 비교(매우 중요!!)
+### 엄격한(strict) 비교(매우 중요!!)
+
+- `==` / `!=` vs `===` / `!==`
 
 ```js
-let a = "a";
-let b = "b";
+let zero1 = 0;
+let zero2 = "0";
+
+if (zero1 == zero2); // true
+if (zero1 === zero2); // false
 ```
 
 ### 출력
 
-```js
-array = [1, 2, 3, 4, 5];
+- `console.log(variable)`, `console.log(array)`, `console.log(object)`
 
-console.log(변수명); //  출력
+```js
+let variable = 4;
+let array = [1, 2, 3, 4, 5];
+
+console.log(variable); //  출력
 console.log(array); // [1, 2, 3, 4, 5] 출력
-console.log(array.toString()); // 1, 2, 3, 4, 5 출력
 ```
 
-### Array 안에 값이 있는지
+### 원소 존재 여부(in Array)
+
+- `indexOf(num)`, `lastIndexOf(num)`
+- `includes(num)`, `includes(num, fromIndex)`
 
 ```js
 let num = 57;
@@ -37,6 +47,21 @@ array.includes(num); // array안에 num이 있으면 true, 없으면 false
 array.includes(num, fromIndex); // index부터 array안의 num을 찾음, 없으면 false
 array.indexOf(num); // array 앞에서부터 num을 찾아 인덱스 리턴, 없으면 -1 리턴
 array.lastIndexOf(num); // array 끝에서부터 num을 찾아 인덱스 리턴, 없으면 -1 리턴
+```
+
+### Max, Min 원소 or 값 추출(in Array)
+
+- `Math.max(num1, num2)`, `Math.min(num1, num2)`
+- `Math.max.apply(null, array)`, `Math.min.apply(null, array)`
+
+```js
+let array = [1, 5, 4, 3, 2];
+
+let max = Math.max(20, 50); // max = 50
+let min = Math.min(20, 50); // min = 20
+
+let maxNum = Math.max.apply(null, array); // maxNum = 5
+let minNum = Math.min.apply(null, array); // minNum = 1
 ```
 
 ## 자료구조
