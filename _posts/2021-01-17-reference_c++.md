@@ -457,17 +457,17 @@ using namepsace std;
 vector<int> v;
 
 bool cmp1(int num1, int num2){
-  return num1 < num2;  // index가 클수록 원소 값이 크다, greater<int>와 동일
+  return num1 < num2;  // less<int>와 동일, 오름차순
 }
 
 // Quick sort --- 불안정
-sort(v.begin(), v.end(), less<int>);  // 인덱스가 클수록 원소 값이 작다
+sort(v.begin(), v.end(), less<int>);  // 작은 것부터, 오름차순
 
 // Merge sort --- 안정(같은 것에 대해 두 번 비교할 때 사용)
 stable_sort(v.begin(), v.end(), cmp1);
 
 // Heap sort --- 안정
-sort_heap(v.begin(), v.end(), greater<int>);  // 인덱스가 클수록 원소 값 크다.
+sort_heap(v.begin(), v.end(), greater<int>);  // 큰 것부터, 내림차순
 
 vector<pair<int, int>> vv;
 
