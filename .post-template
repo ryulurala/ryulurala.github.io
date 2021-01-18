@@ -1,8 +1,24 @@
 ---
-title: "new post"
-excerpt: "new post summary"
-category: new
-tags: [new1, new2]
+title: "문제 이름"
+excerpt: "프로그래머스 풀이"
+category: 프로그래머스
+tags: [C++, JavaScript, 프로그래머스, 솔루션]
 toc: true
 toc_sticky: true
 ---
+
+## 문제링크
+
+[문제 이름](https://)
+
+### C++
+
+```cpp
+
+```
+
+### JavaScript
+
+```js
+
+```
