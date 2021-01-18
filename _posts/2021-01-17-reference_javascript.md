@@ -2,16 +2,19 @@
 title: "JavaScript Reference"
 excerpt: "JavaScript Reference"
 category: Launguage Reference
-tags: [JavaScript, compare, sort, print, stack, queue]
+tags: [JavaScript, compare, sort, print, stack, queue, array]
 toc: true
 toc_sticky: true
 ---
 
 ## 레퍼런스
 
-### 엄격한(strict) 비교(매우 중요!!)
+### '=='/'!=' vs '==='/'!=='
 
-- `==` / `!=` vs `===` / `!==`
+- `==` / `!=`
+  > 비교 연산자: 형 변환 후 값을 비교
+- `===` / `!==`
+  > 일치 연산자: 형 변환 X 비교, 엄격(Strict) **권장!!**
 
 ```js
 let zero1 = 0;
@@ -23,36 +26,79 @@ if (zero1 === zero2); // false
 
 ### 출력
 
-- `console.log(variable)`, `console.log(array)`, `console.log(object)`
+- `console.log(variable1, variable2, ...)`
+  > 변수 출력: variable1 variable2 출력됨.(',' 출력 X)
+- `console.log(array)`
+  > 배열 출력: [value1, value2, value3, ...] 출력됨.
+- `console.dir(object)` or `console.log(object)`
+  > 객체 출력: {key1: value2, key2: value2, ...} 출력됨.
+  > dir(): 속성까지 모두 출력, DOM 객체 출력할 때 권장(브라우저 출력)
+  > 대부분 log 써도 무방
 
 ```js
-let variable = 4;
+let variable1 = 4;
+let variable2 = 5;
 let array = [1, 2, 3, 4, 5];
+let obj = { name: "ryulurala", age: "26" };
 
-console.log(variable); //  출력
+console.log(variable1, variable2); // 4 5 출력
 console.log(array); // [1, 2, 3, 4, 5] 출력
+console.log(obj); // {name: "ryulurala", age: "26"} 출력
+console.dir(obj); // {name: "ryulurala", age: "26"} 출력(브라우저 출력은 다름)
 ```
 
 ### 원소 존재 여부(in Array)
 
-- `indexOf(num)`, `lastIndexOf(num)`
-- `includes(num)`, `includes(num, fromIndex)`
+- `array.indexOf(variable)`
+  > array 앞에서부터 variable 값을 찾아서 Index 리턴, 없으면 -1 리턴
+- `array.lastIndexOf(variable)`
+  > array 뒤에서부터 variable 값을 찾아서 Index 리턴, 없으면 -1 리턴
+- `array.includes(variable)`
+  > array 안에 variable 값이 있으면 true, 없으면 false 리턴
+- `array.includes(num, fromIndex)`
+  > array 안에 fromIndex 부터 variable 값이 있으면 true, 없으면 false 리턴
+
++++
+
+- `array.find(function(value, index, arr){})`
+  > 기본적으로 undefined 리턴
+  > value: 원소 값
+  > index: 인덱스
+  > arr: array 배열 그 자체
 
 ```js
-let num = 57;
-let array = [];
+let array = [1, 4, 3, 4, 5];
 
 // 속도 includes() > indexOf()
-array.includes(num); // array안에 num이 있으면 true, 없으면 false
-array.includes(num, fromIndex); // index부터 array안의 num을 찾음, 없으면 false
-array.indexOf(num); // array 앞에서부터 num을 찾아 인덱스 리턴, 없으면 -1 리턴
-array.lastIndexOf(num); // array 끝에서부터 num을 찾아 인덱스 리턴, 없으면 -1 리턴
+array.includes(1); // true
+array.includes(1, 2); // false, index 2 부터 1을 찾는다
+
+array.indexOf(4); // 1 리턴, 찾으면 바로 리턴
+array.indexOf(6); // -1 리턴
+array.lastIndexOf(4); // 3 리턴, 찾으면 바로 리턴
+array.lastIndexOf(6); // -1 리턴
+
+array.find((value, index) => index); // 찾으면 index를 리턴, 못찾으면 undefined 리턴
+
+array.find((value, index, arr) => {
+  if (value == num) {
+    return index; // 찾으면 index를 리턴, 못찾으면 undefined 리턴
+  }
+});
+
+array.find((item, index));
 ```
 
 ### Max, Min 원소 or 값 추출(in Array)
 
-- `Math.max(num1, num2)`, `Math.min(num1, num2)`
-- `Math.max.apply(null, array)`, `Math.min.apply(null, array)`
+- `Math.max(num1, num2, ...)`
+  > num1, num2, ... 중에 최댓값 값 추출
+- `Math.min(num1, num2, ...)`
+  > num1, num2, ... 중에 최솟값 값 추출
+- `Math.max.apply(null, array)`
+  > array에서 최댓값 추출
+- `Math.min.apply(null, array)`
+  > array에서 최솟값 추출
 
 ```js
 let array = [1, 5, 4, 3, 2];
@@ -64,46 +110,219 @@ let maxNum = Math.max.apply(null, array); // maxNum = 5
 let minNum = Math.min.apply(null, array); // minNum = 1
 ```
 
+### 초기화된 Array 선언
+
+- `Array.from({length: N}, (value, index) => index)`
+  > 초기화된 Array 선언 가능
+  > value: 원소 값이지만 어차피 undefined
+  > index: 인덱스
+
+```js
+let array1 = Array.from({ length: 5 }, (value, index) => {
+  return index; // [0, 1, 2, 3, 4] 로 초기화된 Array 생성
+});
+
+let array2 = Array.from([1, 2, 3], (value) => value * 2); // [2, 4, 6] Array 생성
+```
+
+### 반복문(for-in, for-of, forEach)
+
+- `for(let value of iterables){}`
+  > 순서가 없는 (iterable) Array를 순회할 때 권장
+- `for(let key in enumerables){}`
+  > 순서가 있는 (enumerable) Json 객체를 순회할 때 권장
+- `array.forEach((value, index, arr) => {})`
+  > Array Method 로서 배열의 요소 반복 작업 가능(**권장!!**)
+  > value: 원소 값
+  > index: 인덱스
+  > arr: array 배열 그 자체
+
+```js
+let array = [1, 2, 3, 4, 5];
+let fruits = [
+  { name: "apple", cost: 100 },
+  { name: "banana", cost: 400 },
+  { name: "strawberry", cost: 200 },
+  { name: "grape", cost: 300 },
+];
+
+for (let fruit of fruits) {
+  console.log(fruit); // fruits[0], fruits[1], ..., fruits[3]
+  for (let key in fruit) {
+    console.log(key, value); // apple 100, banana 400, ..., grape 300
+  }
+}
+
+fruits.forEach((value, index, array) => {
+  console.log(value); // 현재 Array index의 원소 값 출력
+  console.log(index); // index 출력
+  console.log(array); // [{name: "apple", cose: 100}, ...] 출력
+});
+```
+
 ## 자료구조
 
 ### Stack
 
+- `Array` 이용
+  > Stack 처럼 사용 가능
+- `array.push(element)`
+  > Stack top에 원소 push
+- `array.pop()`
+  > Stack top에 원소 pop
+- `array[array.length-1]`
+  > Stack의 top
+
+1. array.push(element) / array.pop() / array[array.length-1]
+
 ```js
 let stack = [1, 2, 3, 4, 5];
 
-stack.push(6); // 5를 push back
-stack.pop(); // 6을 pop back
-stack[stack.length - 1]; // top
+stack.push(6); // [1, 2, 3, 4, 5, 6]
+stack.pop(); // [1, 2, 3, 4, 5]
+stack[stack.length - 1]; // 5
 ```
 
 ### Queue
 
+- `Array` 이용
+  > Queue 처럼 사용 가능
+- `array.push(element)`
+  > Queue back에 원소 push
+- `array.shift()`
+  > Queue front에 원소 pop
+- `array[0]`
+  > Queue의 front
+- `array[array.length-1]`
+  > Queue의 back
+
++++
+
+- `unShift(element)`
+  > Array 앞에 원소 추가
+
 ```js
 let queue = [1, 2, 3, 4, 5];
 
-queue.push(6); // 6을 push back
-queue.shift(); // 1을 pop front
-stack[0]; // front
-stack[queue.length - 1]; // back
+queue.push(6); // [1, 2, 3, 4, 5, 6]
+queue.shift(); // [2, 3, 4, 5, 6]
+stack[0]; // 2
+stack[queue.length - 1]; // 6
+```
+
+### Map
+
+- about `Map`
+
+  > `(key, value)` pair로 이루어진 collection
+  > key들은 중복 불가: 하나의 key에는 하나의 value 즉, 갱신됨
+  > `get()`, `set()` 으로 조회 및 삽입
+
+- `new Map()`
+  > Map 생성
+- `map.set(key, value)`
+  > (key, value) pair로 삽입
+  > 중복된 key에 대해 value는 갱신
+- `map.get(key)`
+  > key 값에 대한 value 값 리턴
+- `map.has(key)`
+  > key에 해당하는 value 값 있으면 true, 없으면 false
+- `map.size`
+  > map의 size 리턴
+- `map.delete(key)`
+  > 해당 key에 해당하는 (key, value) pair 삭제
+  > 삭제 결과 리턴, 삭제 못하면 false
+- `map.clear()`
+  > map의 모든 (key, value) pair 삭제
+
+```js
+let map = new Map();
+map.set(1, 2);
+map.set(2, 4);
+map.set(1, 3);
+
+map.get(1); // 3
+map.get(2); // 4
+map.size; // 2
+map.delete(1); // true
+map.delete(4); // false
+map.has(1); // false
+map.has(2); // true
+map.clear();
+```
+
+### Set
+
+- about `Set`
+
+  > `value`로 이루어진 집합(collection)
+  > value들은 중복 불가: 중복된 값을 추가하면 아무 일도 발생하지 않음
+  > `add()` 로 삽입
+
+- `new Set()`
+  > Map 생성
+- `set.add(value)`
+  > value 삽입
+  > 중복된 value 대해 아무 일도 발생 X
+- `set.has(value)`
+  > value 값이 있으면 true, 없으면 false
+- `set.size`
+  > set의 size 리턴
+- `set.delete(value)`
+  > 해당 value 삭제
+  > 삭제 결과 리턴, 삭제 못하면 false
+- `set.clear()`
+  > set의 모든 value 삭제
+
+```js
+let set = new Set();
+set.add(1);
+set.add(2);
+set.add(1);
+
+set.size; // 2
+set.delete(1); // true
+set.delete(4); // false
+set.has(1); // false
+set.has(2); // true
+set.clear();
 ```
 
 ## 알고리즘
 
 ### 정렬(sort)
 
-- `sort([compareFunc]);`
+- about `JavaScript-Sort`
 
-- JavaScript의 sort()는 stable_sort()가 아니다. --- Default: 퀵정렬
-- 정렬할 개수가 2개 미만일 경우 "sort is not a function" 에러 발생
-- `-1`을 리턴하면 바뀌는 원리
+  > JavaScript의 sort()의 기본은 Quick-Sort고 Stable-Sort가 아니다.
+  > `-1`을 리턴하면 바뀌는 원리(`C++`과 동일)
+
+- `sort(function(){});`
+
+  > function() 정렬 함수
+  > sort(): 기본 오름차순 정렬
+
+- 오름차순(ascending) --- `function(a, b)`
+
+  > b값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용
+
+  - `return a-b;`
+  - `return (a-b<0) ? -1 : a===b ? 0 : 1;`
+
+- 내림차순(descending) --- `function(a, b)`
+
+  > a값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용
+
+  - `return b-a;`
+  - `return (b-a<0) ? -1 : a===b ? 0 : 1;`
 
 ```js
 let numbers = [1, 5, 2, 4, 3];
 let fruits = [
-  { name: apple, cost: 100 },
-  { name: banana, cost: 400 },
-  { name: strawberry, cost: 200 },
-  { name: grape, cost: 300 },
+  { name: "apple", cost: 100 },
+  { name: "banana", cost: 400 },
+  { name: "strawberry", cost: 200 },
+  { name: "grape", cost: 300 },
 ];
 
 numbers.sort((a, b) => {
@@ -121,8 +340,13 @@ fruits.sort((item1, item2) => {
   return item1.cost - item2.cost; // 비용으로 내림차순 정렬
 });
 
-completion.sort((person1, person2) => {
-  // person2가 더 크거나 같으면 안바꿈(오름차순)
-  return person1 < person2 ? 1 : person1 === person2 ? 0 : -1; // 사전 정렬
+fruits.sort((a, b) => {
+  // a가 더 크거나 같으면 바꿈(오름차순)
+  return a - b < 0 ? -1 : a === b ? 0 : 1; // 사전 정렬
+});
+
+fruits.sort((a, b) => {
+  // a가 더 크거나 같으면 바꿈(오름차순)
+  return b - a < 0 ? -1 : a === b ? 0 : 1; // 사전 정렬
 });
 ```
