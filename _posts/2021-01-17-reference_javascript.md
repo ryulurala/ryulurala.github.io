@@ -9,7 +9,7 @@ toc_sticky: true
 
 ## 레퍼런스
 
-### '=='/'!=' vs '==='/'!=='
+### 비교연산자('==' vs '===')
 
 - `==` / `!=`
   > 비교 연산자: 형 변환 후 값을 비교
@@ -24,15 +24,15 @@ if (zero1 == zero2); // true
 if (zero1 === zero2); // false
 ```
 
-### 출력
+### 출력(console.log)
 
 - `console.log(variable1, variable2, ...)`
   > 변수 출력: variable1 variable2 출력됨.(',' 출력 X)
 - `console.log(array)`
   > 배열 출력: [value1, value2, value3, ...] 출력됨.
 - `console.dir(object)` or `console.log(object)`
-  > 객체 출력: {key1: value2, key2: value2, ...} 출력됨.
-  > dir(): 속성까지 모두 출력, DOM 객체 출력할 때 권장(브라우저 출력)
+  > 객체 출력: {key1: value2, key2: value2, ...} 출력됨.  
+  > dir(): 속성까지 모두 출력, DOM 객체 출력할 때 권장(브라우저 출력)  
   > 대부분 log 써도 무방
 
 ```js
@@ -58,12 +58,12 @@ console.dir(obj); // {name: "ryulurala", age: "26"} 출력(브라우저 출력�
 - `array.includes(num, fromIndex)`
   > array 안에 fromIndex 부터 variable 값이 있으면 true, 없으면 false 리턴
 
-+++
++++++
 
 - `array.find(function(value, index, arr){})`
-  > 기본적으로 undefined 리턴
-  > value: 원소 값
-  > index: 인덱스
+  > 기본적으로 undefined 리턴  
+  > value: 원소 값  
+  > index: 인덱스  
   > arr: array 배열 그 자체
 
 ```js
@@ -89,16 +89,16 @@ array.find((value, index, arr) => {
 array.find((item, index));
 ```
 
-### Max, Min 원소 or 값 추출(in Array)
+### Max, Min 값 도출(in Array)
 
 - `Math.max(num1, num2, ...)`
-  > num1, num2, ... 중에 최댓값 값 추출
+  > num1, num2, ... 중에 최댓값 값 도출
 - `Math.min(num1, num2, ...)`
-  > num1, num2, ... 중에 최솟값 값 추출
+  > num1, num2, ... 중에 최솟값 값 도출
 - `Math.max.apply(null, array)`
-  > array에서 최댓값 추출
+  > array에서 최댓값 도출
 - `Math.min.apply(null, array)`
-  > array에서 최솟값 추출
+  > array에서 최솟값 도출
 
 ```js
 let array = [1, 5, 4, 3, 2];
@@ -113,8 +113,8 @@ let minNum = Math.min.apply(null, array); // minNum = 1
 ### 초기화된 Array 선언
 
 - `Array.from({length: N}, (value, index) => index)`
-  > 초기화된 Array 선언 가능
-  > value: 원소 값이지만 어차피 undefined
+  > 초기화된 Array 선언 가능  
+  > value: 원소 값이지만 어차피 undefined  
   > index: 인덱스
 
 ```js
@@ -132,9 +132,9 @@ let array2 = Array.from([1, 2, 3], (value) => value * 2); // [2, 4, 6] Array 생
 - `for(let key in enumerables){}`
   > 순서가 있는 (enumerable) Json 객체를 순회할 때 권장
 - `array.forEach((value, index, arr) => {})`
-  > Array Method 로서 배열의 요소 반복 작업 가능(**권장!!**)
-  > value: 원소 값
-  > index: 인덱스
+  > Array Method 로서 배열의 요소 반복 작업 가능(**권장!!**)  
+  > value: 원소 값  
+  > index: 인덱스  
   > arr: array 배열 그 자체
 
 ```js
@@ -163,13 +163,13 @@ fruits.forEach((value, index, array) => {
 ### Array 잘라내기, 교체하기
 
 - `array.slice(startIndex, endIndex)`
-  > startIndex 부터 endIndex 전까지 복제본 리턴
-  > 원본 변경 X
+  > startIndex 부터 endIndex 전까지 복제본 리턴  
+  > 원본 변경 X  
   > endIndex를 지정하지 않을 경우 끝까지 복제
 - `array.splice(startIndex, deleteCount, value1, value2, ...)`
-  > startIndex 부터 deleteCount 개수만큼 value1, value2, ...로 교체
-  > 원본 변경
-  > value를 지정하지 않을 경우 Only. 삭제
+  > startIndex 부터 deleteCount 개수만큼 value1, value2, ...로 교체  
+  > 원본 변경  
+  > value를 지정하지 않을 경우 Only. 삭제  
   > 삭제된 원소 리턴
 
 ```js
@@ -186,18 +186,18 @@ console.log(array); // [1, 11, 12, 6, 7]
 ### `map()`, `filter()`, `find()`, `reduce()`
 
 - `map(function(value, index, array){})`
-  > Array의 요소를 일괄적으로 변경(Mapping)
+  > Array의 요소를 일괄적으로 변경(Mapping)  
   > 부모 스코프 건드리지 않고 Array 리턴
 - `filter(function(value, index, array){})`
-  > Array의 요소를 걸러냄(Filtering)
+  > Array의 요소를 걸러냄(Filtering)  
   > 부모 스코프 건드리지 않고 Array 리턴
 - `find(function(value, index, array){})`
-  > Array의 요소를 찾아냄(Finding)
+  > Array의 요소를 찾아냄(Finding)  
   > 요소 하나만을 리턴
 - `reduce(function(prev, value){}, initialValue)`
-  > 이전 리턴된 prev 값과 현재 값 value 를 이용하여 활용 가능(만능)
-  > 처음 시작 prev 값의 initialValue 지정. ex) `prev = 0;` or `prev = [];`
-  > 부모 스코프 건드리지 않고 Array 리턴
+  - 이전 리턴된 prev 값과 현재 값 value 를 이용하여 활용 가능(만능)
+  - 처음 시작 prev 값의 initialValue 지정. ex) `prev = 0;` or `prev = [];`
+  - 부모 스코프 건드리지 않고 Array 리턴
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -283,8 +283,6 @@ Math.abs(-9); // 9
 - `array[array.length-1]`
   > Stack의 top
 
-1. array.push(element) / array.pop() / array[array.length-1]
-
 ```js
 let stack = [1, 2, 3, 4, 5];
 
@@ -306,7 +304,7 @@ stack[stack.length - 1]; // 5
 - `array[array.length-1]`
   > Queue의 back
 
-+++
++++++
 
 - `unShift(element)`
   > Array 앞에 원소 추가
@@ -324,14 +322,14 @@ stack[queue.length - 1]; // 6
 
 - about `Map`
 
-  > `(key, value)` pair로 이루어진 collection
-  > key들은 중복 불가: 하나의 key에는 하나의 value 즉, 갱신됨
+  > `(key, value)` pair로 이루어진 collection  
+  > key들은 중복 불가: 하나의 key에는 하나의 value 즉, 갱신됨  
   > `get()`, `set()` 으로 조회 및 삽입
 
 - `new Map()`
   > Map 생성
 - `map.set(key, value)`
-  > (key, value) pair로 삽입
+  > (key, value) pair로 삽입  
   > 중복된 key에 대해 value는 갱신
 - `map.get(key)`
   > key 값에 대한 value 값 리턴
@@ -340,7 +338,7 @@ stack[queue.length - 1]; // 6
 - `map.size`
   > map의 size 리턴
 - `map.delete(key)`
-  > 해당 key에 해당하는 (key, value) pair 삭제
+  > 해당 key에 해당하는 (key, value) pair 삭제  
   > 삭제 결과 리턴, 삭제 못하면 false
 - `map.clear()`
   > map의 모든 (key, value) pair 삭제
@@ -365,8 +363,8 @@ map.clear();
 
 - about `Set`
 
-  > `value`로 이루어진 집합(collection)
-  > value들은 중복 불가: 중복된 값을 추가하면 아무 일도 발생하지 않음
+  > `value`로 이루어진 집합(collection)  
+  > value들은 중복 불가: 중복된 값을 추가하면 아무 일도 발생하지 않음  
   > `add()` 로 삽입
 
 - `new Set()`
@@ -406,12 +404,12 @@ set.clear();
 
 - about `JavaScript-Sort`
 
-  > JavaScript의 sort()의 기본은 Quick-Sort고 Stable-Sort가 아니다.
+  > JavaScript의 sort()의 기본은 Quick-Sort이고 Stable-Sort가 아니다.  
   > `-1`을 리턴하면 바뀌는 원리(`C++`과 동일)
 
 - `sort(function(){});`
 
-  > function() 정렬 함수
+  > function() 정렬 함수  
   > sort(): 기본 오름차순 정렬
 
 - 오름차순(ascending) --- `function(a, b)`
