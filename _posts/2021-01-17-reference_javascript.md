@@ -4,7 +4,6 @@ excerpt: "JavaScript Reference"
 category: Launguage Reference
 tags: [JavaScript, compare, sort, print, stack, queue, array]
 toc: true
-toc_sticky: true
 ---
 
 ## 레퍼런스
