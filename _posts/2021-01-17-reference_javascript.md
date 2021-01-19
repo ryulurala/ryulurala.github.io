@@ -477,14 +477,14 @@ set.clear();
   > b값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용
 
   - `return a-b;`
-  - `return (a-b<0) ? -1 : a===b ? 0 : 1;`
+  - `return (a<b) ? -1 : (a===b) ? 0 : 1;`
 
 - 내림차순(descending) --- `function(a, b)`
 
   > a값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용
 
   - `return b-a;`
-  - `return (b-a<0) ? -1 : a===b ? 0 : 1;`
+  - `return (b<a) ? -1 : (a===b) ? 0 : 1;`
 
 ```js
 let numbers = [1, 5, 2, 4, 3];
@@ -511,12 +511,16 @@ fruits.sort((item1, item2) => {
 });
 
 fruits.sort((a, b) => {
-  // a가 더 크거나 같으면 바꿈(오름차순)
-  return a - b < 0 ? -1 : a === b ? 0 : 1; // 사전 정렬
+  // 오름차순(사전 정렬)
+  if (a < b) return -1;
+  else if (a > b) return 1;
+  else return 0;
 });
 
 fruits.sort((a, b) => {
-  // a가 더 크거나 같으면 바꿈(오름차순)
-  return b - a < 0 ? -1 : a === b ? 0 : 1; // 사전 정렬
+  // 내림차순
+  if (a > b) return -1;
+  else if (a < b) return 1;
+  else return 0;
 });
 ```
