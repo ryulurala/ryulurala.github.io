@@ -8,6 +8,33 @@ toc: true
 
 ## 레퍼런스
 
+### 문자열 or 배열 이어붙이기
+
+- `variable.concat(var1, var2, ...)`
+  > `array.concat()` or `str.concat()` 모두 가능  
+  > 원본 변경 X  
+  > 이어붙인 복제본 리턴
+
+```js
+[1, 2, 3].concat(4, 5, 6); // [1, 2, 3, 4, 5, 6]
+"hi".concat(" hello"); // "hi hello"
+```
+
+### 문자열을 숫자로 바꾸기
+
+- `parseInt(str)`
+  > str 문자열을 정수로 바꿔서 리턴
+- `parseFloat(str)`
+  > str 문자열을 실수로 바꿔서 리턴
+- `str*1`
+  > 문자열과 숫자와 `*`, `/` 연산을 하면 숫자로 바뀜 **중요!!**
+
+```js
+Number.parseInt("-123.4"); // -123
+Number.parseFloat("-123.4"); // -123.4
+"-123.4" * 1; // -123.4
+```
+
 ### 비교연산자('==' vs '===')
 
 - `==` / `!=`
@@ -111,11 +138,12 @@ let array2 = Array.from([1, 2, 3], (value) => value * 2); // [2, 4, 6] Array 생
 
 +++++
 
-- `array.find(function(value, index, arr){})`
+- `array.find(function(value, index, arr){return 조건})`
   > 기본적으로 undefined 리턴  
   > value: 원소 값  
   > index: 인덱스  
   > arr: array 배열 그 자체
+  > 찾으면 value 값 리턴
 
 ```js
 let array = [1, 4, 3, 4, 5];
@@ -129,12 +157,8 @@ array.indexOf(6); // -1 리턴
 array.lastIndexOf(4); // 3 리턴, 찾으면 바로 리턴
 array.lastIndexOf(6); // -1 리턴
 
-array.find((value, index) => index); // 찾으면 index를 리턴, 못찾으면 undefined 리턴
-
 array.find((value, index, arr) => {
-  if (value == num) {
-    return index; // 찾으면 index를 리턴, 못찾으면 undefined 리턴
-  }
+  return value > 2; // 2보다 큰 원소를 찾으면 해당 value 리턴, 못찾으면 undefined 리턴
 });
 
 array.find((item, index));
