@@ -145,7 +145,8 @@ array.find((item, index));
 - `array.slice(startIndex, endIndex)`
   > startIndex 부터 endIndex 전까지 복제본 리턴  
   > 원본 변경 X  
-  > endIndex를 지정하지 않을 경우 끝까지 복제
+  > endIndex를 지정하지 않을 경우 끝까지 복제  
+  > `array.slice()` 로 깊은 복사 가능
 - `array.splice(startIndex, deleteCount, value1, value2, ...)`
   > startIndex 부터 deleteCount 개수만큼 value1, value2, ...로 교체  
   > 원본 변경  
@@ -155,6 +156,7 @@ array.find((item, index));
 ```js
 let array = [1, 2, 3, 4, 5, 6, 7];
 
+array.slice(); // 깊은 복사
 array.slice(2); // [3, 4, 5, 6, 7]
 array.slice(2, 5); // [3, 4, 5]
 console.log(array); // [1, 2, 3, 4, 5, 6, 7]
