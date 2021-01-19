@@ -228,6 +228,46 @@ let reduceResult2 = arr.reduce((prev, value) => {
 }, []); // [2, 4, 6, 8, 10]
 ```
 
+### 소수점 변환
+
+- 정수 변환
+
+  - `Math.ceil(number)`
+    > 소수점 올림, 정수 리턴
+  - `Math.floor(number)`
+    > 소수점 내림, 정수 리턴
+  - `Math.round(number)`
+    > 소수점 반올림, 정수 리턴
+
+- 소수 변환
+  - `.toFixed(number)`
+    > 소수점 num+1 자리에서 반올림 후 num 자리까지 리턴
+
+```js
+let num = 10.567;
+
+Math.ceil(num); // 11
+Math.floor(num); // 10
+Math.round(num); //11
+
+num.toFixed(2); // 10.57
+```
+
+### 제곱, 루트, 절댓값
+
+- `Math.pow(base, exponent)`
+  > base의 exponent 거듭 제곱 리턴
+- `Math.sqrt(number)`
+  > number의 제곱근 리턴
+- `Math.abs(number)`
+  > number의 절댓값 리턴
+
+```js
+Math.pow(3, 2); // 3^2 = 9
+Math.sqrt(4); // root 4 = 2
+Math.abs(-9); // 9
+```
+
 ---
 
 ## 자료구조
