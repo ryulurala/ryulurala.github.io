@@ -47,7 +47,59 @@ console.log(obj); // {name: "ryulurala", age: "26"} 출력
 console.dir(obj); // {name: "ryulurala", age: "26"} 출력(브라우저 출력은 다름)
 ```
 
-### 원소 존재 여부(in Array)
+### 반복문(for-in, for-of, forEach)
+
+- `for(let value of iterables){}`
+  > 순서가 없는 (iterable) Array를 순회할 때 권장
+- `for(let key in enumerables){}`
+  > 순서가 있는 (enumerable) Json 객체를 순회할 때 권장
+- `array.forEach((value, index, arr) => {})`
+  > Array Method 로서 배열의 요소 반복 작업 가능(**권장!!**)  
+  > value: 원소 값  
+  > index: 인덱스  
+  > arr: array 배열 그 자체
+
+```js
+let array = [1, 2, 3, 4, 5];
+let fruits = [
+  { name: "apple", cost: 100 },
+  { name: "banana", cost: 400 },
+  { name: "strawberry", cost: 200 },
+  { name: "grape", cost: 300 },
+];
+
+for (let fruit of fruits) {
+  console.log(fruit); // fruits[0], fruits[1], ..., fruits[3]
+  for (let key in fruit) {
+    console.log(key, value); // apple 100, banana 400, ..., grape 300
+  }
+}
+
+fruits.forEach((value, index, array) => {
+  console.log(value); // 현재 Array index의 원소 값 출력
+  console.log(index); // index 출력
+  console.log(array); // [{name: "apple", cose: 100}, ...] 출력
+});
+```
+
+### Array 다루기(in JavaScript)
+
+#### 초기화된 Array 선언
+
+- `Array.from({length: N}, (value, index) => index)`
+  > 초기화된 Array 선언 가능  
+  > value: 원소 값이지만 어차피 undefined  
+  > index: 인덱스
+
+```js
+let array1 = Array.from({ length: 5 }, (value, index) => {
+  return index; // [0, 1, 2, 3, 4] 로 초기화된 Array 생성
+});
+
+let array2 = Array.from([1, 2, 3], (value) => value * 2); // [2, 4, 6] Array 생성
+```
+
+#### 원소 존재 여부(in Array)
 
 - `array.indexOf(variable)`
   > array 앞에서부터 variable 값을 찾아서 Index 리턴, 없으면 -1 리턴
@@ -89,78 +141,7 @@ array.find((value, index, arr) => {
 array.find((item, index));
 ```
 
-### Max, Min 값 도출(in Array)
-
-- `Math.max(num1, num2, ...)`
-  > num1, num2, ... 중에 최댓값 값 도출
-- `Math.min(num1, num2, ...)`
-  > num1, num2, ... 중에 최솟값 값 도출
-- `Math.max.apply(null, array)`
-  > array에서 최댓값 도출
-- `Math.min.apply(null, array)`
-  > array에서 최솟값 도출
-
-```js
-let array = [1, 5, 4, 3, 2];
-
-let max = Math.max(20, 50); // max = 50
-let min = Math.min(20, 50); // min = 20
-
-let maxNum = Math.max.apply(null, array); // maxNum = 5
-let minNum = Math.min.apply(null, array); // minNum = 1
-```
-
-### 초기화된 Array 선언
-
-- `Array.from({length: N}, (value, index) => index)`
-  > 초기화된 Array 선언 가능  
-  > value: 원소 값이지만 어차피 undefined  
-  > index: 인덱스
-
-```js
-let array1 = Array.from({ length: 5 }, (value, index) => {
-  return index; // [0, 1, 2, 3, 4] 로 초기화된 Array 생성
-});
-
-let array2 = Array.from([1, 2, 3], (value) => value * 2); // [2, 4, 6] Array 생성
-```
-
-### 반복문(for-in, for-of, forEach)
-
-- `for(let value of iterables){}`
-  > 순서가 없는 (iterable) Array를 순회할 때 권장
-- `for(let key in enumerables){}`
-  > 순서가 있는 (enumerable) Json 객체를 순회할 때 권장
-- `array.forEach((value, index, arr) => {})`
-  > Array Method 로서 배열의 요소 반복 작업 가능(**권장!!**)  
-  > value: 원소 값  
-  > index: 인덱스  
-  > arr: array 배열 그 자체
-
-```js
-let array = [1, 2, 3, 4, 5];
-let fruits = [
-  { name: "apple", cost: 100 },
-  { name: "banana", cost: 400 },
-  { name: "strawberry", cost: 200 },
-  { name: "grape", cost: 300 },
-];
-
-for (let fruit of fruits) {
-  console.log(fruit); // fruits[0], fruits[1], ..., fruits[3]
-  for (let key in fruit) {
-    console.log(key, value); // apple 100, banana 400, ..., grape 300
-  }
-}
-
-fruits.forEach((value, index, array) => {
-  console.log(value); // 현재 Array index의 원소 값 출력
-  console.log(index); // index 출력
-  console.log(array); // [{name: "apple", cose: 100}, ...] 출력
-});
-```
-
-### Array 잘라내기, 교체하기
+#### Array 잘라내기, 교체하기
 
 - `array.slice(startIndex, endIndex)`
   > startIndex 부터 endIndex 전까지 복제본 리턴  
@@ -183,7 +164,7 @@ console.log(array.splice(1, 4, 11, 12)); // [2, 3, 4, 5]
 console.log(array); // [1, 11, 12, 6, 7]
 ```
 
-### `map()`, `filter()`, `find()`, `reduce()`
+#### `map()`, `filter()`, `find()`, `reduce()`
 
 - `map(function(value, index, array){})`
   > Array의 요소를 일괄적으로 변경(Mapping)  
@@ -228,7 +209,30 @@ let reduceResult2 = arr.reduce((prev, value) => {
 }, []); // [2, 4, 6, 8, 10]
 ```
 
-### 소수점 변환
+### Math 다루기(in JavaScript)
+
+#### Max, Min 값 도출(in Array)
+
+- `Math.max(num1, num2, ...)`
+  > num1, num2, ... 중에 최댓값 값 도출
+- `Math.min(num1, num2, ...)`
+  > num1, num2, ... 중에 최솟값 값 도출
+- `Math.max.apply(null, array)`
+  > array에서 최댓값 도출
+- `Math.min.apply(null, array)`
+  > array에서 최솟값 도출
+
+```js
+let array = [1, 5, 4, 3, 2];
+
+let max = Math.max(20, 50); // max = 50
+let min = Math.min(20, 50); // min = 20
+
+let maxNum = Math.max.apply(null, array); // maxNum = 5
+let minNum = Math.min.apply(null, array); // minNum = 1
+```
+
+#### 소수점 변환
 
 - 정수 변환
 
@@ -253,7 +257,7 @@ Math.round(num); //11
 num.toFixed(2); // 10.57
 ```
 
-### 제곱, 루트, 절댓값
+#### 제곱, 루트, 절댓값
 
 - `Math.pow(base, exponent)`
   > base의 exponent 거듭 제곱 리턴
@@ -266,6 +270,61 @@ num.toFixed(2); // 10.57
 Math.pow(3, 2); // 3^2 = 9
 Math.sqrt(4); // root 4 = 2
 Math.abs(-9); // 9
+```
+
+### String 다루기(in JavaScript)
+
+#### 부분 문자열
+
+- `str.substring(startIndex, endIndex)`
+  > str 문자열의 startIndex부터 endIndex 전까지 부분 문자열을 리턴  
+  > 원본 변경 X
+
+```js
+"string".substring(1, 3); // "tr" 리턴
+```
+
+#### 대문자, 소문자 변환
+
+- `str.toUpperCase()`
+  > str을 대문자들로 변환
+- `str.toLowerCase()`
+  > str을 소문자들로 변환
+
+```js
+"StRing".toUpperCase(); // "STRING" 리턴
+"StRing".toLowerCase(); // "string" 리턴
+```
+
+#### 공백 제거
+
+- `str.trim()`
+  > 앞뒤 공백 제거
+
+```js
+"   string    ".trim(); // "string" 리턴
+```
+
+#### 구분자로 나눔
+
+- `str.split(separator))`
+  > separator(구분자)로 나눔
+
+```js
+let words = "hi hello ryulurala".split(" ");
+console.log(words); // ["hi", "hello", "ryulurala"]
+```
+
+#### 문자열 교체
+
+- `str.replace(oldString, newString)`
+  > oldString을 newString으로 교체
+- `str.replace(regExp)`
+  > regExp(정규식)으로 교체
+
+```js
+let str = "hi hello ryulurala".replace("hello", "bye");
+console.log(str); // "hi bye ryulurala"
 ```
 
 ---
