@@ -306,14 +306,18 @@ Math.abs(-9); // 9
 "   string    ".trim(); // "string" 리턴
 ```
 
-#### 구분자로 나눔
+#### 구분자로 나눔 or 합침
 
-- `str.split(separator))`
+- `str.split(separator)`
   > separator(구분자)로 나눔
+- `array.join(separator)`
+  > separator(구분자)를 포함하여 문자열 리턴
 
 ```js
 let words = "hi hello ryulurala".split(" ");
 console.log(words); // ["hi", "hello", "ryulurala"]
+
+words.join("-"); // "hi-hello-ryulurala"
 ```
 
 #### 문자열 교체
