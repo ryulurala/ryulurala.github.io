@@ -1,24 +1,14 @@
 ---
-title: "문제 이름"
-excerpt: "프로그래머스 풀이"
-category: 프로그래머스
-tags: [C++, JavaScript, 프로그래머스, 솔루션]
+title: "제목"
+excerpt: "요약"
+category: 카테고리
+tags: [태그1, 태그2, 태그3]
 toc: true
 toc_sticky: true
 ---
 
-## 문제 링크
+## 주제
 
-[문제 이름](https://)
+### 부분
 
-### C++
-
-```cpp
-
-```
-
-### JavaScript
-
-```js
-
-```
+### 부분
