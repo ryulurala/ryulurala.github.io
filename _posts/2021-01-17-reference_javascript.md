@@ -160,6 +160,76 @@ fruits.forEach((value, index, array) => {
 });
 ```
 
+### Array 잘라내기, 교체하기
+
+- `array.slice(startIndex, endIndex)`
+  > startIndex 부터 endIndex 전까지 복제본 리턴
+  > 원본 변경 X
+  > endIndex를 지정하지 않을 경우 끝까지 복제
+- `array.splice(startIndex, deleteCount, value1, value2, ...)`
+  > startIndex 부터 deleteCount 개수만큼 value1, value2, ...로 교체
+  > 원본 변경
+  > value를 지정하지 않을 경우 Only. 삭제
+  > 삭제된 원소 리턴
+
+```js
+let array = [1, 2, 3, 4, 5, 6, 7];
+
+array.slice(2); // [3, 4, 5, 6, 7]
+array.slice(2, 5); // [3, 4, 5]
+console.log(array); // [1, 2, 3, 4, 5, 6, 7]
+
+console.log(array.splice(1, 4, 11, 12)); // [2, 3, 4, 5]
+console.log(array); // [1, 11, 12, 6, 7]
+```
+
+### `map()`, `filter()`, `find()`, `reduce()`
+
+- `map(function(value, index, array){})`
+  > Array의 요소를 일괄적으로 변경(Mapping)
+  > 부모 스코프 건드리지 않고 Array 리턴
+- `filter(function(value, index, array){})`
+  > Array의 요소를 걸러냄(Filtering)
+  > 부모 스코프 건드리지 않고 Array 리턴
+- `find(function(value, index, array){})`
+  > Array의 요소를 찾아냄(Finding)
+  > 요소 하나만을 리턴
+- `reduce(function(prev, value){}, initialValue)`
+  > 이전 리턴된 prev 값과 현재 값 value 를 이용하여 활용 가능(만능)
+  > 처음 시작 prev 값의 initialValue 지정. ex) `prev = 0;` or `prev = [];`
+  > 부모 스코프 건드리지 않고 Array 리턴
+
+```js
+let arr = [1, 2, 3, 4, 5];
+
+let mapResult = arr.map((value, index, array) => {
+  return value * 2;
+});
+console.log(mapResult); // [2, 4, 6, 8, 10]
+
+let filterResult = arr.filter((value, index, array) => {
+  return value % 2 == 0;
+});
+console.log(filterResult); // [2, 4]
+
+let findResult = arr.find((value, index, array) => {
+  return value % 2 == 0;
+});
+console.log(findResult); // 2
+
+let reduceResult1 = arr.reduce((prev, value) => {
+  return prev + value;
+}, 0);
+console.log(reduceResult1); // 15
+
+let reduceResult2 = arr.reduce((prev, value) => {
+  prev.push(value * 2);
+  return prev;
+}, []); // [2, 4, 6, 8, 10]
+```
+
+---
+
 ## 자료구조
 
 ### Stack
@@ -287,6 +357,8 @@ set.has(1); // false
 set.has(2); // true
 set.clear();
 ```
+
+---
 
 ## 알고리즘
 
