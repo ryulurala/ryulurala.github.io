@@ -443,7 +443,7 @@ str3 += "string";
   - reverse(): 뒤집기
   - max() / min(): 최댓값 / 최소값 비교 반환
   - max_element() / min_element(): 최댓값 / 최솟값 원소 값 반환
-  - transform() + \<cctype>: 대, 소문자 변환
+  - transform() + \<cctype>: 대, 소문자 변환 ++++ 그냥 tolower(char), toupper(char) 이용
   - next_permutation(), prev_permutation(): 순열 + 조합 응용
 
 1. Sort(정렬)
