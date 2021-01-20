@@ -103,14 +103,14 @@ for (let fruit of fruits) {
 #### 반복문(forEach, some)
 
 - `.some((value, index, arr) => {})`
-  > Array Method 로서 배열의 요소 반복 작업 가능
-  > 중간에 `Only. return true;`으로 `break;` **가능**(**권장!!**)  
+  > Array Method 로서 배열의 요소 반복 작업 가능  
+  > 중간에 `Only. return true;`으로 `break;` 안해도 무방(**권장!!**)  
   > value: 원소 값  
   > index: 인덱스  
   > arr: array 배열 그 자체
 - `.forEach((value, index, arr) => {})`
   > Array Method 로서 배열의 요소 반복 작업 가능  
-  > 중간에 `break;` **불가능**, 모든 요소 작업
+  > 중간에 `break;` **불가능**, 모든 요소 작업  
   > value: 원소 값  
   > index: 인덱스  
   > arr: array 배열 그 자체
@@ -165,7 +165,7 @@ let array2 = Array.from([1, 2, 3], (value) => value * 2); // [2, 4, 6] Array 생
   > 기본적으로 undefined 리턴  
   > value: 원소 값  
   > index: 인덱스  
-  > arr: array 배열 그 자체
+  > arr: array 배열 그 자체  
   > 찾으면 value 값 리턴
 
 ```js
@@ -226,9 +226,9 @@ console.log(array); // [1, 11, 12, 6, 7]
   > Array의 요소를 찾아냄(Finding)  
   > 요소 하나만을 리턴
 - `reduce(function(prev, value){}, initialValue)`
-  - 이전 리턴된 prev 값과 현재 값 value 를 이용하여 활용 가능(만능)
-  - 처음 시작 prev 값의 initialValue 지정. ex) `prev = 0;` or `prev = [];`
-  - 부모 스코프 건드리지 않고 Array 리턴
+  > 이전 리턴된 prev 값과 현재 값 value 를 이용하여 활용 가능(만능)  
+  > 처음 시작 prev 값의 initialValue 지정. ex) `prev = 0;` or `prev = [];`  
+  > 부모 스코프 건드리지 않고 Array 리턴
 
 ```js
 let arr = [1, 2, 3, 4, 5];
@@ -327,9 +327,9 @@ Math.abs(-9); // 9
 #### 문자열 뒤집기(by Array Method)
 
 - `str.split("").reverse().join("")`
-  > 1. split("") - Array가 됨
-  > 2. reverse() - Array를 뒤집음
-  > 3. join("") - 다시 문자열화
+  > a) `split("")` - Array가 됨  
+  > b) `reverse()` - Array를 뒤집음  
+  > c) `join("")` - 다시 문자열화
 
 ```js
 let str = "hihi";
@@ -458,7 +458,9 @@ queue.unShift(4); // [4, 2, 3, 4, 5, 6]
 
   > `(key, value)` pair로 이루어진 collection  
   > key들은 중복 불가: 하나의 key에는 하나의 value 즉, 갱신됨  
-  > `get()`, `set()` 으로 조회 및 삽입
+  > `get()`, `set()` 으로 조회 및 삽입  
+  > `forEach((value, index) => {})`로 접근 가능  
+  > `some(function(){})`은 불가
 
 - `new Map()`
   > Map 생성
@@ -499,19 +501,21 @@ map.clear();
 
   > `value`로 이루어진 집합(collection)  
   > value들은 중복 불가: 중복된 값을 추가하면 아무 일도 발생하지 않음  
-  > `add()` 로 삽입
+  > `add()` 로 삽입  
+  > `forEach((value, index) => {})`로 접근 가능  
+  > `some(function(){})`은 불가
 
 - `new Set()`
   > Map 생성
 - `set.add(value)`
-  > value 삽입
+  > value 삽입  
   > 중복된 value 대해 아무 일도 발생 X
 - `set.has(value)`
   > value 값이 있으면 true, 없으면 false
 - `set.size`
   > set의 size 리턴
 - `set.delete(value)`
-  > 해당 value 삭제
+  > 해당 value 삭제  
   > 삭제 결과 리턴, 삭제 못하면 false
 - `set.clear()`
   > set의 모든 value 삭제
@@ -547,18 +551,13 @@ set.clear();
   > sort(): 기본 오름차순 정렬
 
 - 오름차순(ascending) --- `function(a, b)`
-
-  > b값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용
-
-  - `return a-b;`
-  - `return (a<b) ? -1 : (a===b) ? 0 : 1;`
-
+  > b값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용  
+  > `return a-b;`  
+  > `return (a<b) ? -1 : (a===b) ? 0 : 1;`
 - 내림차순(descending) --- `function(a, b)`
-
-  > a값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용
-
-  - `return b-a;`
-  - `return (b<a) ? -1 : (a===b) ? 0 : 1;`
+  > a값이 더 크면 음수(-1)가 리턴되어 바뀌는 것을 이용  
+  > `return b-a;`  
+  > `return (b<a) ? -1 : (a===b) ? 0 : 1;`
 
 ```js
 let numbers = [1, 5, 2, 4, 3];
