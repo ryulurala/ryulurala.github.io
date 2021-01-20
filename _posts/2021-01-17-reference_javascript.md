@@ -74,17 +74,12 @@ console.log(obj); // {name: "ryulurala", age: "26"} 출력
 console.dir(obj); // {name: "ryulurala", age: "26"} 출력(브라우저 출력은 다름)
 ```
 
-### 반복문(for-in, for-of, forEach)
+### 반복문(for-in, for-of)
 
 - `for(let value of iterables){}`
   > 순서가 없는 (iterable) Array를 순회할 때 권장
 - `for(let key in enumerables){}`
   > 순서가 있는 (enumerable) Json 객체를 순회할 때 권장
-- `array.forEach((value, index, arr) => {})`
-  > Array Method 로서 배열의 요소 반복 작업 가능(**권장!!**)  
-  > value: 원소 값  
-  > index: 인덱스  
-  > arr: array 배열 그 자체
 
 ```js
 let array = [1, 2, 3, 4, 5];
@@ -101,15 +96,42 @@ for (let fruit of fruits) {
     console.log(key, value); // apple 100, banana 400, ..., grape 300
   }
 }
-
-fruits.forEach((value, index, array) => {
-  console.log(value); // 현재 Array index의 원소 값 출력
-  console.log(index); // index 출력
-  console.log(array); // [{name: "apple", cose: 100}, ...] 출력
-});
 ```
 
 ### Array 다루기(in JavaScript)
+
+#### 반복문(forEach, some)
+
+- `.some((value, index, arr) => {})`
+  > Array Method 로서 배열의 요소 반복 작업 가능
+  > 중간에 `Only. return true;`으로 `break;` **가능**(**권장!!**)  
+  > value: 원소 값  
+  > index: 인덱스  
+  > arr: array 배열 그 자체
+- `.forEach((value, index, arr) => {})`
+  > Array Method 로서 배열의 요소 반복 작업 가능  
+  > 중간에 `break;` **불가능**, 모든 요소 작업
+  > value: 원소 값  
+  > index: 인덱스  
+  > arr: array 배열 그 자체
+
+```js
+let arr = [1, 2, 3, 4, 5];
+
+arr.some((value, index, array) => {
+  console.log(value); // 현재 Array index의 원소 값 출력
+  console.log(index); // index 출력
+  console.log(array); // [1, 2, 3, 4, 5] 출력
+  // 중간에 break; 가능
+  if (value === 3) return true; // false하면 break 안됨
+});
+
+arr.forEach((value, index, array) => {
+  console.log(value); // 현재 Array index의 원소 값 출력
+  console.log(index); // index 출력
+  console.log(array); // [1, 2, 3, 4, 5] 출력
+});
+```
 
 #### 초기화된 Array 선언
 
