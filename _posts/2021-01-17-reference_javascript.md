@@ -324,6 +324,23 @@ Math.abs(-9); // 9
 
 ### String 다루기(in JavaScript)
 
+#### 문자열 뒤집기(by Array Method)
+
+- `str.split("").reverse().join("")`
+  > 1. split("") - Array가 됨
+  > 2. reverse() - Array를 뒤집음
+  > 3. join("") - 다시 문자열화
+
+```js
+let str = "hihi";
+str = str.split(""); // ["h", "i", "h", "i"]
+str = str.reverse(); // ["i", "h", "i", "h"]
+str = str.join(""); // "ihih"
+
+// 위와 같은 메소드(Promise 이용)
+str = "hihi".split("").reverse().join("");
+```
+
 #### 부분 문자열
 
 - `str.substring(startIndex, endIndex)`
