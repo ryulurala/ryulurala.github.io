@@ -26,13 +26,14 @@ toc: true
   > str 문자열을 정수로 바꿔서 리턴
 - `parseFloat(str)`
   > str 문자열을 실수로 바꿔서 리턴
-- `str*1`
-  > 문자열과 숫자와 `*`, `/` 연산을 하면 숫자로 바뀜 **중요!!**
+- `+str` or `str*1` or `str/1`
+  > 문자열과 숫자와 사칙 연산을 하면 숫자로 바뀜 **중요!!**
 
 ```js
 Number.parseInt("-123.4"); // -123
 Number.parseFloat("-123.4"); // -123.4
 "-123.4" * 1; // -123.4
++"-123.4"; // -123.4
 ```
 
 ### 비교연산자('==' vs '===')
@@ -157,6 +158,8 @@ array.indexOf(6); // -1 리턴
 array.lastIndexOf(4); // 3 리턴, 찾으면 바로 리턴
 array.lastIndexOf(6); // -1 리턴
 
+// +++++
+
 array.find((value, index, arr) => {
   return value > 2; // 2보다 큰 원소를 찾으면 해당 value 리턴, 못찾으면 undefined 리턴
 });
@@ -242,9 +245,9 @@ let reduceResult2 = arr.reduce((prev, value) => {
   > num1, num2, ... 중에 최댓값 값 도출
 - `Math.min(num1, num2, ...)`
   > num1, num2, ... 중에 최솟값 값 도출
-- `Math.max.apply(null, array)`
+- `Math.max.apply(null, array)` or `Math.max(...array)`
   > array에서 최댓값 도출
-- `Math.min.apply(null, array)`
+- `Math.min.apply(null, array)` or `Math.min(...array)`
   > array에서 최솟값 도출
 
 ```js
@@ -404,6 +407,10 @@ queue.push(6); // [1, 2, 3, 4, 5, 6]
 queue.shift(); // [2, 3, 4, 5, 6]
 stack[0]; // 2
 stack[queue.length - 1]; // 6
+
+// +++++
+
+queue.unShift(4); // [4, 2, 3, 4, 5, 6]
 ```
 
 ### Map
