@@ -8,6 +8,13 @@ toc: true
 
 ## 레퍼런스
 
+### Regular Expression(정규 표현식)
+
+```js
+const expression = "100*300+100-400/500";
+expression.split(/[+-*/]/g); // ["100", "*", "300", "+", "100", "-" "400", "/", "500"]
+```
+
 ### 문자열 or 배열 이어붙이기
 
 - `variable.concat(var1, var2, ...)`
@@ -189,7 +196,7 @@ array.find((value, index, arr) => {
 array.find((item, index));
 ```
 
-#### Array 잘라내기, 교체하기
+#### Array 교체, 삽입, 삭제
 
 - `array.slice(startIndex, endIndex)`
   > startIndex 부터 endIndex 전까지 복제본 리턴  
@@ -197,10 +204,10 @@ array.find((item, index));
   > endIndex를 지정하지 않을 경우 끝까지 복제  
   > `array.slice()` 로 깊은 복사 가능
 - `array.splice(startIndex, deleteCount, value1, value2, ...)`
-  > startIndex 부터 deleteCount 개수만큼 value1, value2, ...로 교체  
+  > startIndex부터 deleteCount개수만큼 삭제하고 value1, value2, ...로 교체  
   > 원본 변경  
-  > value를 지정하지 않을 경우 Only. 삭제  
-  > 삭제된 원소 리턴
+  > deleteCount를 0으로 할 경우 삽입 가능  
+  > value를 지정하지 않을 경우 삭제 가능
 
 ```js
 let array = [1, 2, 3, 4, 5, 6, 7];
@@ -212,6 +219,7 @@ console.log(array); // [1, 2, 3, 4, 5, 6, 7]
 
 console.log(array.splice(1, 4, 11, 12)); // [2, 3, 4, 5]
 console.log(array); // [1, 11, 12, 6, 7]
+array.splice(2, 0, 10, 11); // Index: 2에 10, 11 삽입
 ```
 
 #### `map()`, `filter()`, `find()`, `reduce()`
@@ -403,7 +411,7 @@ str.replace("hello", "bye"); // "hi bye ryulurala"
 // 정규표현식(Regular Expression)
 str.replace(/\./gi, ","); // '.'을 ','로 치환
 str.replace(/[a-z]/gi, "A"); // 'a' 부터 'z'까지 대소문자 구별없이 A로 치환
-str.replace(/[abc]/gi, ""); // 'a', 'b', 'c'중 하나를 찾아 제거
+str.replace(/[abc]/gi, ""); // 'a', 'b', 'c'를 찾아 문자열 내에 제거
 str.replace(/[^abc]/gi, ""); // 'a', 'b', 'c'를 제외한 나머지 제거
 str.replace(/\s/gi, ""); // 문자열 내에 모든 공백 제거
 ```
