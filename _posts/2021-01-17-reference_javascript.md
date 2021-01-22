@@ -391,11 +391,21 @@ words.join("-"); // "hi-hello-ryulurala"
 - `str.replace(oldString, newString)`
   > oldString을 newString으로 교체
 - `str.replace(regExp)`
-  > regExp(정규식)으로 교체
+  > regExp(정규식)으로 교체  
+  > `g`: global(전역으로)  
+  > `i`: ignore(대소문자 구별하지 않음)  
+  > `\(백슬래시)`: 특수문자를 Escape 처리하여 문자 그대로로 인식
 
 ```js
-let str = "hi hello ryulurala".replace("hello", "bye");
-console.log(str); // "hi bye ryulurala"
+let str = "hi hello ryulurala";
+str.replace("hello", "bye"); // "hi bye ryulurala"
+
+// 정규표현식(Regular Expression)
+str.replace(/\./gi, ","); // '.'을 ','로 치환
+str.replace(/[a-z]/gi, "A"); // 'a' 부터 'z'까지 대소문자 구별없이 A로 치환
+str.replace(/[abc]/gi, ""); // 'a', 'b', 'c'중 하나를 찾아 제거
+str.replace(/[^abc]/gi, ""); // 'a', 'b', 'c'를 제외한 나머지 제거
+str.replace(/\s/gi, ""); // 문자열 내에 모든 공백 제거
 ```
 
 ---
