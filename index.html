@@ -6,13 +6,20 @@
     <title>ryulurala's portfolio</title>
     <script>
       window.onload = () => {
-        let test = document.getElementById("ua");
-        test.textContent = window.navigator.userAgent;
+        let ua = document.getElementById("ua");
+        let up = document.getElementById("up");
+        ua.textContent = window.navigator.userAgent;
+        up.textContent = window.navigator.platform;
       };
     </script>
   </head>
   <body>
-    Hi!
-    <ua id="ua"></test>
+    <p>Hi!</p>
+    <p>
+    <ua id="ua"></ua>
+    </p>
+    <p>
+      <up id="up"></up>
+    </p>
   </body>
 </html>
